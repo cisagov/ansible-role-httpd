@@ -4,13 +4,22 @@
 [![Total alerts](https://img.shields.io/lgtm/alerts/g/cisagov/ansible-role-httpd.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/cisagov/ansible-role-httpd/alerts/)
 [![Language grade: Python](https://img.shields.io/lgtm/grade/python/g/cisagov/ansible-role-httpd.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/cisagov/ansible-role-httpd/context:python)
 
-This is a skeleton project that can be used to quickly get a new
-[cisagov](https://github.com/cisagov) Ansible role GitHub project
-started.  This skeleton project contains
-[licensing information](LICENSE), as well as
-[pre-commit hooks](https://pre-commit.com) and
-[GitHub Actions](https://github.com/features/actions) configurations
-appropriate for an Ansible role.
+This is an Ansible role that installs [Apache
+httpd](https://httpd.apache.org/), along with the
+[mod_auth_gssapi](https://github.com/gssapi/mod_auth_gssapi) and
+[mod_authnz_pam](https://github.com/adelton/mod_authnz_pam) modules.
+This lays the base for an Apache httpd server suitable for
+authentication against
+[Kerberos](https://en.wikipedia.org/wiki/Kerberos_(protocol)) via
+GSSAPI and authorization via
+[PAM](https://en.wikipedia.org/wiki/Linux_PAM).
+
+This is ideal for a web server in [the
+COOL](https://github.com/cisagov/cool-system) that wishes to
+authenticate users via Kerberos and authorize users via
+[`pam_sss`](https://linux.die.net/man/8/pam_sss) against
+[FreeIPA](https://www.freeipa.org/page/Main_Page)'s HBAC (host-based
+access control) rules.
 
 ## Requirements ##
 
@@ -29,11 +38,11 @@ None.
 Here's how to use it in a playbook:
 
 ```yaml
-- hosts: all
+- hosts: web
   become: yes
   become_method: sudo
   roles:
-    - skeleton
+    - httpd
 ```
 
 ## Contributing ##
@@ -56,4 +65,4 @@ with this waiver of copyright interest.
 
 ## Author Information ##
 
-First Last - <first.last@trio.dhs.gov>
+Shane Frasier - <jeremy.frasier@trio.dhs.gov>

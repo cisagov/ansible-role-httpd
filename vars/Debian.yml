@@ -1,0 +1,11 @@
+---
+# vars file for Debian
+
+# The packages to install for httpd
+httpd_package_names:
+  - apache2
+  - libapache2-mod-auth-gssapi
+  - libapache2-mod-authnz-pam
+
+# The name of the httpd systemd service
+httpd_service_name: apache2
