@@ -4,6 +4,10 @@ set -o nounset
 set -o errexit
 set -o pipefail
 
+# This script is intended to set up the HTTP FreeIPA service on this
+# host.  It creates the service if it does not already exist, then
+# retrieves and saves the keytab.
+#
 # These variables must be set before client installation:
 #
 # hostname: The hostname of this IPA client (e.g. client.example.com).
