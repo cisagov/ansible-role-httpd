@@ -21,3 +21,9 @@
   service:
     name: "{{ httpd_service_name }}"
     enabled: yes
+
+- name: Copy setup script
+  copy:
+    src: setup_http_service.sh
+    dest: /usr/local/sbin
+    mode: 0700
