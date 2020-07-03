@@ -71,3 +71,6 @@ fi
 ipa-getkeytab --quiet --keytab=/etc/krb5_http.keytab --principal="HTTP/$hostname"
 chgrp www-data /etc/krb5_http.keytab
 chmod g+r /etc/krb5_http.keytab
+
+# Restart the httpd systemd service
+systemctl restart apache2.service
