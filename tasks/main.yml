@@ -13,9 +13,25 @@
       paths:
         - "{{ role_path }}/vars"
 
-- name: Install httpd with mod_auth_gssapi and mod_authnz_pam
+- name: Install httpd with modules needed to create a kerberized proxy
   package:
     name: "{{ httpd_package_names }}"
+
+# On RedHat these modules are already enabled, and apache2_module does
+# not work there, so we only run this task on non-RedHat hosts.
+- name: Enable some httpd modules
+  apache2_module:
+    name: "{{ item }}"
+  loop:
+    - auth_gssapi
+    - authnz_pam
+    - headers
+    - proxy
+    - proxy_http
+    - session
+    - session_cookie
+    - ssl
+  when: ansible_os_family != "RedHat"
 
 - name: Enable httpd
   service:
