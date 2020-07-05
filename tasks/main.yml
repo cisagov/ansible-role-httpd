@@ -33,6 +33,10 @@
     - ssl
   when: ansible_os_family != "RedHat"
 
+- name: Systemd daemon-reload
+  systemd:
+    daemon_reload: true
+
 - name: Enable httpd
   service:
     name: "{{ httpd_service_name }}"
