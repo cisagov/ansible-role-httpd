@@ -25,7 +25,17 @@ def test_debian_packages(host, pkg):
         assert host.package(pkg).is_installed
 
 
-@pytest.mark.parametrize("pkg", ["httpd", "mod_auth_gssapi", "mod_authnz_pam"])
+@pytest.mark.parametrize(
+    "pkg",
+    [
+        "httpd",
+        "mod_auth_gssapi",
+        "mod_authnz_pam",
+        "mod_proxy_html",
+        "mod_session",
+        "mod_ssl",
+    ],
+)
 def test_redhat_packages(host, pkg):
     """Test that the appropriate packages were installed."""
     if (

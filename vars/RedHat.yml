@@ -6,6 +6,9 @@ httpd_package_names:
   - httpd
   - mod_auth_gssapi
   - mod_authnz_pam
+  - mod_proxy_html
+  - mod_session
+  - mod_ssl
 
 # The name of the httpd systemd service
 httpd_service_name: httpd

@@ -66,5 +66,11 @@ then
     ipa service-add-principal "HTTP/$hostname" "HTTP/ip-${ip_address_dashes}.ec2.internal"
 fi
 
-# Grab the keytab for the HTTP service
-ipa-getkeytab --quiet --keytab=/etc/krb5.keytab --principal="HTTP/$hostname"
+# Grab the keytab for the HTTP service and change its permissions so
+# that the httpd process can read it.
+ipa-getkeytab --quiet --keytab=/etc/krb5_http.keytab --principal="HTTP/$hostname"
+chgrp www-data /etc/krb5_http.keytab
+chmod g+r /etc/krb5_http.keytab
+
+# Restart the httpd systemd service
+systemctl restart apache2.service
