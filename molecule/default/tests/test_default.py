@@ -72,4 +72,4 @@ def test_files(host, f):
     assert host.file(f).is_file
     assert host.file(f).user == "root"
     assert host.file(f).group == "root"
-    assert host.file(f).mode == 0o700
+    assert host.file(f).mode == 0o500

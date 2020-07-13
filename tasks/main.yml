@@ -46,4 +46,4 @@
   copy:
     src: setup_http_service.sh
     dest: /usr/local/sbin
-    mode: 0700
+    mode: 0500
