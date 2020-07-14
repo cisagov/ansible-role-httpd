@@ -65,11 +65,11 @@ def test_services(host):
     assert host.service(service).is_enabled
 
 
-@pytest.mark.parametrize("f", ["/usr/local/sbin/setup_http_service.sh"])
+@pytest.mark.parametrize("f", ["/usr/local/sbin/01_setup_http_service.sh"])
 def test_files(host, f):
     """Test that the expected files were installed."""
     assert host.file(f).exists
     assert host.file(f).is_file
     assert host.file(f).user == "root"
     assert host.file(f).group == "root"
-    assert host.file(f).mode == 0o700
+    assert host.file(f).mode == 0o500
