@@ -30,6 +30,6 @@ galaxy_info:
       versions:
         - bionic
         - xenial
-  role_name: https
+  role_name: httpd
 
 dependencies: []
