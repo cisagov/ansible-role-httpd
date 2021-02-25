@@ -19,26 +19,26 @@ freeipa_vars_file=/var/lib/cloud/instance/freeipa-vars.sh
 # Load above variable from a file installed by cloud-init:
 if [[ -f "$freeipa_vars_file" ]]
 then
-    # Disable this warning since the file is only available at runtime
-    # on the server.
-    #
-    # shellcheck disable=SC1090
-    source "$freeipa_vars_file"
+  # Disable this warning since the file is only available at runtime
+  # on the server.
+  #
+  # shellcheck disable=SC1090
+  source "$freeipa_vars_file"
 else
-    echo "FreeIPA variables file does not exist: $freeipa_vars_file"
-    echo "It should have been created by cloud-init at boot."
-    exit 254
+  echo "FreeIPA variables file does not exist: $freeipa_vars_file"
+  echo "It should have been created by cloud-init at boot."
+  exit 254
 fi
 
 # Get the default Ethernet interface
 function get_interface {
-    ip route | grep default | sed "s/^.* dev \([^ ]*\).*$/\1/"
+  ip route | grep default | sed "s/^.* dev \([^ ]*\).*$/\1/"
 }
 
 # Get the IP address corresponding to an interface
 function get_ip {
-    ip --family inet address show dev "$1" | \
-        grep --perl-regexp --only-matching 'inet \K[\d.]+'
+  ip --family inet address show dev "$1" | \
+    grep --perl-regexp --only-matching 'inet \K[\d.]+'
 }
 
 # Create the HTTP/$hostname service if it does not already exist.
@@ -56,14 +56,14 @@ rc=$?
 set -o errexit
 if [[ $rc -ne 0 ]]
 then
-    ipa service-add "HTTP/$hostname"
-    # Grab our IP address
-    interface=$(get_interface)
-    ip_address=$(get_ip "$interface")
-    ip_address_dashes=${ip_address//./-}
-    # Add an alias that is the PTR record as determined from the
-    # Shared Services VPC.
-    ipa service-add-principal "HTTP/$hostname" "HTTP/ip-${ip_address_dashes}.ec2.internal"
+  ipa service-add "HTTP/$hostname"
+  # Grab our IP address
+  interface=$(get_interface)
+  ip_address=$(get_ip "$interface")
+  ip_address_dashes=${ip_address//./-}
+  # Add an alias that is the PTR record as determined from the
+  # Shared Services VPC.
+  ipa service-add-principal "HTTP/$hostname" "HTTP/ip-${ip_address_dashes}.ec2.internal"
 fi
 
 # Grab the keytab for the HTTP service and change its permissions so

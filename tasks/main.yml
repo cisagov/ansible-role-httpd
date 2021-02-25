@@ -1,6 +1,6 @@
 ---
 - name: Load var file with package names based on the OS type
-  include_vars: "{{ lookup('first_found', params) }}"
+  ansible.builtin.include_vars: "{{ lookup('first_found', params) }}"
   vars:
     params:
       files:
@@ -11,13 +11,13 @@
         - "{{ role_path }}/vars"
 
 - name: Install httpd with modules needed to create a kerberized proxy
-  package:
+  ansible.builtin.package:
     name: "{{ httpd_package_names }}"
 
 # On RedHat these modules are already enabled, and apache2_module does
 # not work there, so we only run this task on non-RedHat hosts.
 - name: Enable some httpd modules
-  apache2_module:
+  community.general.apache2_module:
     name: "{{ item }}"
   loop:
     - auth_gssapi
@@ -32,16 +32,16 @@
   when: ansible_os_family != "RedHat"
 
 - name: Systemd daemon-reload
-  systemd:
+  ansible.builtin.systemd:
     daemon_reload: true
 
 - name: Enable httpd
-  service:
+  ansible.builtin.service:
     name: "{{ httpd_service_name }}"
     enabled: yes
 
 - name: Copy setup script
-  copy:
+  ansible.builtin.copy:
     src: 01_setup_http_service.sh
     dest: /usr/local/sbin
     mode: 0500
