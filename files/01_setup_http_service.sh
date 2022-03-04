@@ -13,12 +13,12 @@ set -o pipefail
 # hostname: The hostname of this IPA client (e.g. client.example.com).
 
 USAGE=$(
-  cat << 'END_OF_LINE'
+  cat << END_OF_LINE
 Set up the HTTP FreeIPA service on this host.
 
 Usage:
-  01_setup_http_service.sh [IPA-GROUP-ALLOWED-TO-CREATE-KEYTAB]
-  01_setup_http_service.sh (-h | --help)
+  ${0##*/} [IPA-GROUP-ALLOWED-TO-CREATE-KEYTAB]
+  ${0##*/} (-h | --help)
 
 END_OF_LINE
 )
