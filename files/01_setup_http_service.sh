@@ -90,7 +90,7 @@ fi
 
 # If an IPA-GROUP-ALLOWED-TO-CREATE-KEYTAB argument was provided,
 # add that group to the service.
-if [ $# -eq 1 ]; then
+if [ -v group_allowed_to_create_keytab ]; then
   ipa service-allow-create-keytab "HTTP/$hostname" --groups="$group_allowed_to_create_keytab"
 fi
 
