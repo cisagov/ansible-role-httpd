@@ -12,6 +12,30 @@ set -o pipefail
 #
 # hostname: The hostname of this IPA client (e.g. client.example.com).
 
+USAGE=$(
+  cat << END_OF_LINE
+Set up the HTTP FreeIPA service on this host.
+
+Usage:
+  ${0##*/} [IPA-GROUP-ALLOWED-TO-CREATE-KEYTAB]
+  ${0##*/} (-h | --help)
+
+END_OF_LINE
+)
+
+# Parse command line arguments
+if [ $# -eq 1 ]; then
+  if [ "$1" == "-h" ] || [ "$1" == "--help" ]; then
+    echo "${USAGE}"
+    exit 0
+  else
+    group_allowed_to_create_keytab=$1
+  fi
+elif [ $# -gt 1 ]; then
+  echo "${USAGE}"
+  exit 1
+fi
+
 # The file installed by cloud-init that contains the value for the
 # above variables.
 freeipa_vars_file=/var/lib/cloud/instance/freeipa-vars.sh
@@ -62,6 +86,12 @@ if [[ $rc -ne 0 ]]; then
   # Add an alias that is the PTR record as determined from the
   # Shared Services VPC.
   ipa service-add-principal "HTTP/$hostname" "HTTP/ip-${ip_address_dashes}.ec2.internal"
+fi
+
+# If an IPA-GROUP-ALLOWED-TO-CREATE-KEYTAB argument was provided,
+# add that group to the service.
+if [ -v group_allowed_to_create_keytab ]; then
+  ipa service-allow-create-keytab "HTTP/$hostname" --groups="$group_allowed_to_create_keytab"
 fi
 
 # Grab the keytab for the HTTP service and change its permissions so
