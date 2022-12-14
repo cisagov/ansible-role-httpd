@@ -1,8 +1,7 @@
 # ansible-role-httpd #
 
 [![GitHub Build Status](https://github.com/cisagov/ansible-role-httpd/workflows/build/badge.svg)](https://github.com/cisagov/ansible-role-httpd/actions)
-[![Total alerts](https://img.shields.io/lgtm/alerts/g/cisagov/ansible-role-httpd.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/cisagov/ansible-role-httpd/alerts/)
-[![Language grade: Python](https://img.shields.io/lgtm/grade/python/g/cisagov/ansible-role-httpd.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/cisagov/ansible-role-httpd/context:python)
+[![CodeQL](https://github.com/cisagov/ansible-role-httpd/workflows/CodeQL/badge.svg)](https://github.com/cisagov/ansible-role-httpd/actions/workflows/codeql-analysis.yml)
 
 This is an Ansible role that installs [Apache
 httpd](https://httpd.apache.org/), along with the
@@ -48,8 +47,10 @@ Here's how to use it in a playbook:
 - hosts: web
   become: yes
   become_method: sudo
-  roles:
-    - httpd
+  tasks:
+    - name: Install httpd
+      ansible.builtin.include_role:
+        name: httpd
 ```
 
 ## Contributing ##
