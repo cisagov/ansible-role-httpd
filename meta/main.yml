@@ -18,8 +18,9 @@ galaxy_info:
   min_ansible_version: "2.10"
   namespace: cisagov
   platforms:
-    # Amazon Linux 2023 does not offer
-    # mod_auth_gssapi or mod_authnz_pam
+    # Amazon Linux 2023 does not offer the following packages required by httpd:
+    # mod_auth_gssapi,mod_authnz_pam
+    # https://docs.aws.amazon.com/linux/al2023/release-notes/all-packages-al2023-20230419.html
     # - name: Amazon Linux 2023
     #   versions:
     #     - any
