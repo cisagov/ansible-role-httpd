@@ -16,8 +16,9 @@ lint: |
   ansible-lint
   flake8
 platforms:
-  # Amazon Linux 2023 does not offer the following packages required by httpd:
-  # mod_auth_gssapi,mod_authnz_pam
+  # Amazon Linux 2023 does not offer the following Apache modules required by
+  # this role:
+  # mod_auth_gssapi, mod_authnz_pam
   # https://docs.aws.amazon.com/linux/al2023/release-notes/all-packages-al2023-20230419.html
   # - image: amazonlinux:2023
   #   name: amazonlinux2023
