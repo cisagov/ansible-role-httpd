@@ -18,22 +18,25 @@ galaxy_info:
   min_ansible_version: "2.10"
   namespace: cisagov
   platforms:
-    - name: Amazon Linux 2
-      versions:
-        - any
+    # Amazon Linux 2023 does not offer the following Apache modules required by
+    # this role:
+    # mod_auth_gssapi, mod_authnz_pam
+    # https://docs.aws.amazon.com/linux/al2023/release-notes/all-packages-al2023-20230419.html
+    # - name: Amazon Linux 2023
+    #   versions:
+    #     - any
     - name: Debian
       versions:
-        - stretch
         - buster
         - bullseye
-        # Kali linux isn't an option here, but it is based on
-        # Debian Testing:
-        # https://www.kali.org/docs/policy/kali-linux-relationship-with-debian
         - bookworm
     - name: Fedora
       versions:
         - "36"
         - "37"
+    - name: Kali
+      versions:
+        - "2023"
     - name: Ubuntu
       versions:
         - bionic
