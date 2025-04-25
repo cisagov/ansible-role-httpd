@@ -44,4 +44,4 @@
   ansible.builtin.copy:
     src: 01_setup_http_service.sh
     dest: /usr/local/sbin
-    mode: 0500
+    mode: u=rx,g=,o=
