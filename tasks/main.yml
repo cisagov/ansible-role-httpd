@@ -37,11 +37,11 @@
 
 - name: Enable httpd
   ansible.builtin.service:
-    name: "{{ httpd_service_name }}"
     enabled: yes
+    name: "{{ httpd_service_name }}"
 
 - name: Copy setup script
   ansible.builtin.copy:
-    src: 01_setup_http_service.sh
     dest: /usr/local/sbin
     mode: u=rx,g=,o=
+    src: 01_setup_http_service.sh
