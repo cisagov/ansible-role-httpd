@@ -1,6 +1,7 @@
 # ansible-role-httpd #
 
 [![GitHub Build Status](https://github.com/cisagov/ansible-role-httpd/workflows/build/badge.svg)](https://github.com/cisagov/ansible-role-httpd/actions)
+[![License](https://img.shields.io/github/license/cisagov/ansible-role-httpd)](https://spdx.org/licenses/)
 [![CodeQL](https://github.com/cisagov/ansible-role-httpd/workflows/CodeQL/badge.svg)](https://github.com/cisagov/ansible-role-httpd/actions/workflows/codeql-analysis.yml)
 
 This is an Ansible role that installs [Apache
