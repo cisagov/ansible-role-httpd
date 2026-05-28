@@ -48,5 +48,6 @@ galaxy_info:
       versions:
         - jammy
         - noble
+        - resolute
   role_name: httpd
   standalone: true
