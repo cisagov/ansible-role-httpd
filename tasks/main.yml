@@ -31,12 +31,9 @@
     - ssl
   when: ansible_os_family != "RedHat"
 
-- name: Systemd daemon-reload
-  ansible.builtin.systemd:
-    daemon_reload: true
-
 - name: Enable httpd
-  ansible.builtin.service:
+  ansible.builtin.systemd_service:
+    daemon_reload: true
     enabled: true
     name: "{{ httpd_service_name }}"
 
