@@ -31,13 +31,10 @@
     - ssl
   when: ansible_os_family != "RedHat"
 
-- name: Systemd daemon-reload
-  ansible.builtin.systemd:
+- name: Enable or disable httpd
+  ansible.builtin.systemd_service:
     daemon_reload: true
-
-- name: Enable httpd
-  ansible.builtin.service:
-    enabled: true
+    enabled: "{{ httpd_enable }}"
     name: "{{ httpd_service_name }}"
 
 - name: Copy setup script

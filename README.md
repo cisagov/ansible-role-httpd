@@ -27,14 +27,9 @@ None.
 
 ## Role Variables ##
 
-None.
-
-<!--
 | Variable | Description | Default | Required |
 | -------- | ----------- | ------- | -------- |
-| optional_variable | Describe its purpose. | `default_value` | No |
-| required_variable | Describe its purpose. | n/a | Yes |
--->
+| httpd_enable | A boolean indicating whether or not to enable the httpd systemd service. | `true` | No |
 
 ## Dependencies ##
 
